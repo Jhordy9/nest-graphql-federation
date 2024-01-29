@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  auth-db:
+    container_name: auth-db
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: mysqlrootpassword
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: mysqlpassword
+      MYSQL_DATABASE: auth-db
+    ports:
+      - '3306:3306'
