@@ -16,12 +16,10 @@ export class GqlAuthGuard implements CanActivate {
     const ctx = GqlExecutionContext.create(context);
     const request = ctx.getContext().req;
     const token = this.extractTokenFromHeader(request.req);
-    console.log('token', token);
     if (!token) {
       throw new UnauthorizedException();
     }
     try {
-      console.log('payload', process.env.JWT_SECRET);
       const payload = await this.jwtService.verifyAsync(token, {
         secret: process.env.JWT_SECRET,
       });

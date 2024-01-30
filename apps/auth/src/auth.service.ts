@@ -13,15 +13,14 @@ export class AuthService {
   ) {}
 
   async signUp(signUpInput: SignUpInput) {
-    const { password, ...restSignUpInput } = signUpInput;
+    const { password, email, name } = signUpInput;
 
     const hashPassword = await hash(password, 10);
 
-    console.log(hashPassword, restSignUpInput);
-
     const user = await this.prisma.user.create({
       data: {
-        ...restSignUpInput,
+        name,
+        email: email.toLowerCase(),
         password: hashPassword,
       },
     });
