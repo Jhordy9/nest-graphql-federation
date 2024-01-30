@@ -1,4 +1,4 @@
-import { Resolver, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Mutation, Args, Query } from '@nestjs/graphql';
 import { ClientsService } from './clients.service';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { Contacts } from './entities/contacts.entity';
@@ -18,16 +18,30 @@ export class ClientsResolver {
   @Mutation(() => [Contacts])
   createContacts(
     @CurrentUser() user: CurrentUser,
-    @Args('createContactsInput') createContactsInput: [CreateContactsInput],
+    @Args('createContactsInput', { type: () => [CreateContactsInput] })
+    createContactsInput: [CreateContactsInput],
   ) {
-    if (user.email.includes('macapa')) {
-      return this.clientsService.createMacapaContacts(createContactsInput);
+    const emailDomain = user.email.split('@')[1];
+
+    if (emailDomain.includes('macapa')) {
+      return this.clientsService.createMacapaContacts(
+        createContactsInput,
+        user.sub,
+      );
     }
 
-    if (user.email.includes('varejao')) {
-      return this.clientsService.createVarejaoContacts(createContactsInput);
+    if (emailDomain.includes('varejao')) {
+      return this.clientsService.createVarejaoContacts(
+        createContactsInput,
+        user.sub,
+      );
     }
 
     throw new BadRequestException('User not allowed to create contacts');
+  }
+
+  @Query(() => String)
+  hello() {
+    return 'Hello Mercafacil!';
   }
 }

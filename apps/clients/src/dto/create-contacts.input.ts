@@ -1,4 +1,5 @@
 import { InputType, Field } from '@nestjs/graphql';
+import { Length } from 'class-validator';
 
 @InputType()
 export class CreateContactsInput {
@@ -6,5 +7,6 @@ export class CreateContactsInput {
   name: string;
 
   @Field()
+  @Length(12)
   cellphone: string;
 }

@@ -24,7 +24,7 @@ services:
       - '3307:3306'
 
   mongo-db:
-    container_name: mongo-db
+    container_name: mongo
     image: mongo
     ports:
       - '27017:27017'
