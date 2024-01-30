@@ -11,3 +11,20 @@ services:
       MYSQL_DATABASE: auth-db
     ports:
       - '3306:3306'
+
+  clients-db:
+    container_name: clients-db
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: mysqlrootpassword
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: mysqlpassword
+      MYSQL_DATABASE: clients-db
+    ports:
+      - '3307:3307'
+
+  mongo-db:
+    container_name: mongo-db
+    image: mongo
+    ports:
+      - '27017:27017'

@@ -19,7 +19,9 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./apps/gateway/test/jest-e2e.json",
     "db:generate:auth": "prisma generate --schema ./apps/auth/prisma/schema.prisma",
-    "db:migrate:auth": "prisma db push --schema ./apps/auth/prisma/schema.prisma"
+    "db:migrate:auth": "prisma db push --schema ./apps/auth/prisma/schema.prisma",
+    "db:generate:clients": "prisma generate --schema ./apps/clients/prisma/schema.prisma",
+    "db:migrate:clients": "prisma db push --schema ./apps/clients/prisma/schema.prisma"
   },
   "dependencies": {
     "@apollo/gateway": "^2.7.1",

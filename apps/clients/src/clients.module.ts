@@ -11,6 +11,9 @@ import { GqlAuthGuard } from './guards/auth.guard';
 import { JwtModule } from '@nestjs/jwt';
 import { constants } from './constants';
 import { ConfigModule } from '@nestjs/config';
+import { DatabaseModule } from './providers/database.module';
+import { contactsProvider } from './providers/mongodb.provider';
+import { PrismaService } from './providers/prisma.service';
 
 @Module({
   imports: [
@@ -18,6 +21,7 @@ import { ConfigModule } from '@nestjs/config';
     JwtModule.register({
       secret: constants.jwtSecret,
     }),
+    DatabaseModule,
     GraphQLModule.forRoot<ApolloFederationDriverConfig>({
       driver: ApolloFederationDriver,
       context: ({ req }: any) => req,
@@ -30,6 +34,8 @@ import { ConfigModule } from '@nestjs/config';
     ClientsResolver,
     ClientsService,
     { provide: APP_GUARD, useClass: GqlAuthGuard },
+    contactsProvider,
+    PrismaService,
   ],
 })
 export class ClientsModule {}
