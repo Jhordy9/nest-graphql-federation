@@ -18,10 +18,15 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./apps/gateway/test/jest-e2e.json",
+    "db:migrate:auth": "prisma migrate dev --schema ./apps/auth/prisma/schema.prisma",
+    "db:pull:auth": "prisma db pull --schema ./apps/auth/prisma/schema.prisma",
     "db:generate:auth": "prisma generate --schema ./apps/auth/prisma/schema.prisma",
-    "db:migrate:auth": "prisma db push --schema ./apps/auth/prisma/schema.prisma",
+    "db:migrate:clients": "prisma migrate dev --schema ./apps/clients/prisma/schema.prisma",
+    "db:pull:clients": "prisma db pull --schema ./apps/clients/prisma/schema.prisma",
     "db:generate:clients": "prisma generate --schema ./apps/clients/prisma/schema.prisma",
-    "db:migrate:clients": "prisma db push --schema ./apps/clients/prisma/schema.prisma"
+    "db:generate": "yarn db:generate:auth && yarn db:generate:clients",
+    "db:migrate": "yarn db:migrate:auth && yarn db:migrate:clients",
+    "db:pull": "yarn db:pull:auth && yarn db:pull:clients"
   },
   "dependencies": {
     "@apollo/gateway": "^2.7.1",

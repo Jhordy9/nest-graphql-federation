@@ -1,21 +1,18 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-  output   = "./__generated__"
   provider = "prisma-client-js"
+  output   = "./__generated__"
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("AUTH_DATABASE_URL")
+  provider          = "mysql"
+  url               = env("AUTH_DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_AUTH_DATABASE_URL")
 }
 
 model User {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
-  //
   email     String   @unique
   name      String
   password  String
