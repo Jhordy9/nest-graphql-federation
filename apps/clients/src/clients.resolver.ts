@@ -16,7 +16,7 @@ export class ClientsResolver {
   constructor(private readonly clientsService: ClientsService) {}
 
   @Mutation(() => [Contacts])
-  createContacts(
+  async createContacts(
     @CurrentUser() user: CurrentUser,
     @Args('createContactsInput', { type: () => [CreateContactsInput] })
     createContactsInput: [CreateContactsInput],
@@ -24,14 +24,14 @@ export class ClientsResolver {
     const emailDomain = user.email.split('@')[1];
 
     if (emailDomain.includes('macapa')) {
-      return this.clientsService.createMacapaContacts(
+      return await this.clientsService.createMacapaContacts(
         createContactsInput,
         user.sub,
       );
     }
 
     if (emailDomain.includes('varejao')) {
-      return this.clientsService.createVarejaoContacts(
+      return await this.clientsService.createVarejaoContacts(
         createContactsInput,
         user.sub,
       );

@@ -12,7 +12,7 @@ export class ClientsService {
     private prisma: PrismaService,
   ) {}
 
-  async createVarejaoContacts(
+  async createMacapaContacts(
     createContactsInput: [CreateContactsInput],
     userId: string,
   ) {
@@ -20,7 +20,7 @@ export class ClientsService {
       createContactsInput.map((contact) =>
         this.prisma.contact.create({
           data: { ...contact, createdBy: userId },
-          select: { id: true, name: true, cellphone: true },
+          select: { id: true, name: true, cellphone: true, client: true },
         }),
       ),
     );
@@ -28,7 +28,7 @@ export class ClientsService {
     return contacts;
   }
 
-  async createMacapaContacts(
+  async createVarejaoContacts(
     createContactsInput: [CreateContactsInput],
     userId: string,
   ) {
@@ -40,12 +40,17 @@ export class ClientsService {
 
     const contacts = await this.catModel.insertMany(formatContacts);
 
-    return contacts;
+    return contacts.map((contact) => ({
+      id: contact._id,
+      name: contact.name,
+      cellphone: contact.cellphone,
+      client: contact.client,
+    }));
   }
 
   private formatPhoneNumber(input: string) {
     const cleanedNumber = input.replace(/\D/g, '');
-    const match = cleanedNumber.match(/^(\d{1,4})(\d{2})(\d{4,10})$/);
+    const match = cleanedNumber.match(/^(\d{1,2})(\d{2})(\d{4,10})$/);
 
     if (!match) {
       return input;

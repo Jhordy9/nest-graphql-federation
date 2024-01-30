@@ -10,4 +10,7 @@ export class Contacts {
 
   @Field()
   cellphone: string;
+
+  @Field()
+  client: string;
 }

@@ -14,4 +14,6 @@ export type Contact = {
   _id: string;
   name: string;
   cellphone: string;
+  client: string;
+  createdBy: string;
 } & mongoose.Document;
