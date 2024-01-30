@@ -5,7 +5,7 @@ import { Contacts } from './entities/contacts.entity';
 import { CreateContactsInput } from './dto/create-contacts.input';
 import { BadRequestException } from '@nestjs/common';
 
-type CurrentUser = {
+export type CurrentUser = {
   sub: string;
   email: string;
   iat: number;
