@@ -3,7 +3,8 @@ import { AuthService } from './auth.service';
 import { AuthResolver } from './auth.resolver';
 import { PrismaService } from './prisma.service';
 import { JwtModule } from '@nestjs/jwt';
-import { jwtConstants } from './constants';
+import { constants } from './constants';
+import { ConfigModule } from '@nestjs/config';
 import {
   ApolloFederationDriverConfig,
   ApolloFederationDriver,
@@ -13,9 +14,10 @@ import { GraphQLModule } from '@nestjs/graphql';
 @Module({
   providers: [AuthResolver, AuthService, PrismaService],
   imports: [
+    ConfigModule.forRoot(),
     JwtModule.register({
       global: true,
-      secret: jwtConstants.secret,
+      secret: constants.jwtSecret,
     }),
     GraphQLModule.forRoot<ApolloFederationDriverConfig>({
       driver: ApolloFederationDriver,
