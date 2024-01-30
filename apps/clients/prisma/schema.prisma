@@ -17,7 +17,7 @@ model Contact {
   name      String
   cellphone String
   createdBy String   @map("created_by")
-  client    String   @default("Macapá")
+  client    String   @default("Macapa")
 
   @@map("contacts")
 }
