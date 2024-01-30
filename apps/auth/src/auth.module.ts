@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthResolver } from './auth.resolver';
-import { PrismaService } from './prisma.service';
 import { JwtModule } from '@nestjs/jwt';
 import { constants } from './constants';
 import { ConfigModule } from '@nestjs/config';
@@ -10,6 +9,7 @@ import {
   ApolloFederationDriver,
 } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
+import { PrismaService } from './providers/prisma.service';
 
 @Module({
   providers: [AuthResolver, AuthService, PrismaService],
