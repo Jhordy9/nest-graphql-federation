@@ -32,6 +32,19 @@
 $ yarn install
 ```
 
+## Set up database
+
+```bash
+# generate
+$ yarn run db:generate
+
+# pull migrations
+$ yarn run db:pull
+
+# start database locally
+$ docker-compose up -d
+```
+
 ## Running the app
 
 ```bash
@@ -52,7 +65,7 @@ $ yarn run start:prod
 $ yarn run test
 
 # e2e tests
-$ yarn run test:e2e
+$ yarn run test:e2e:auth
 
 # test coverage
 $ yarn run test:cov
