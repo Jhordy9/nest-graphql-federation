@@ -48,14 +48,15 @@ $ docker-compose up -d
 ## Running the app
 
 ```bash
-# development
-$ yarn run start
+# start auth app
+$ yarn run start:dev auth
 
-# watch mode
+# start clients app
+$ yarn run start:dev clients
+
+# start gateway
 $ yarn run start:dev
 
-# production mode
-$ yarn run start:prod
 ```
 
 ## Test
