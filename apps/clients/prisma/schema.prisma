@@ -15,7 +15,7 @@ model Contact {
   updatedAt DateTime @updatedAt @map("updated_at")
   //
   name      String
-  cellphone String
+  cellphone String   @db.VarChar(20)
   createdBy String   @map("created_by")
   client    String   @default("Macapa")
 
